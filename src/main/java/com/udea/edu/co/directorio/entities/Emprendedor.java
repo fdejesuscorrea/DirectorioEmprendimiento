@@ -1,89 +1,47 @@
 package com.udea.edu.co.directorio.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "emprendedores")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Emprendedor {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_number")
-    private int idNumber;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @OneToMany
+    private TipoDocumento tipoDocumento;
 
-    @Column(name = "middle_name")
-    private String middleName;
+    private Long numeroDocumento;
 
-    @Column(name = "lastname")
-    private String lastName;
+    private String nombres;
 
-    @Column(name="rolEmprendedor")
-    private String rolEmprendedor;
+    private String apellidos;
 
-    @Column(name= "estado")
-    private String estado;
+    private Long telefono;
 
-    @Column(name= "vinculo")
-    private String vinculo;
+    @OneToMany
+    private Vinculo vinculo;
 
-    public int getIdNumber() {
-        return idNumber;
-    }
+    @OneToMany
+    private  Programa programa;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @OneToMany
+    private Dependencia dependencia;
 
-    public String getMiddleName() {
-        return middleName;
-    }
+    @OneToMany
+    private Estado estado;
 
-    public String getLastName() {
-        return lastName;
-    }
+    @OneToMany
+    private Genero genero;
 
-    public String getRolEmprendedor() {
-        return rolEmprendedor;
-    }
+    private String linkedin;
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public String getVinculo() {
-        return vinculo;
-    }
-
-    public void setIdNumber(int idNumber) {
-        this.idNumber = idNumber;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setRolEmprendedor(String rolEmprendedor) {
-        this.rolEmprendedor = rolEmprendedor;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public void setVinculo(String vinculo) {
-        this.vinculo = vinculo;
-    }
-    // Getters and setters
 }
