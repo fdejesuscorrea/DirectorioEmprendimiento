@@ -1,89 +1,55 @@
 package com.udea.edu.co.directorio.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "emprendedores")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Emprendedor {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_number")
-    private int idNumber;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    private String email;
 
-    @Column(name = "middle_name")
-    private String middleName;
+    @ManyToOne
+    private TipoDocumento tipoDocumento;
 
-    @Column(name = "lastname")
-    private String lastName;
+    private Long numeroDocumento;
 
-    @Column(name="rolEmprendedor")
-    private String rolEmprendedor;
+    private String nombres;
 
-    @Column(name= "estado")
-    private String estado;
+    private String apellidos;
 
-    @Column(name= "vinculo")
-    private String vinculo;
+    private Long telefono;
 
-    public int getIdNumber() {
-        return idNumber;
-    }
+    @ManyToOne
+    private Vinculo vinculo;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @ManyToOne
+    private  Programa programa;
 
-    public String getMiddleName() {
-        return middleName;
-    }
+    @ManyToOne
+    private Dependencia dependencia;
 
-    public String getLastName() {
-        return lastName;
-    }
+    @ManyToOne
+    private Estado estado;
 
-    public String getRolEmprendedor() {
-        return rolEmprendedor;
-    }
+    @ManyToOne
+    private Genero genero;
 
-    public String getEstado() {
-        return estado;
-    }
+    private String linkedin;
 
-    public String getVinculo() {
-        return vinculo;
-    }
+    @ManyToMany
+    private List<Emprendimiento> emprendimiento = new ArrayList<>();
 
-    public void setIdNumber(int idNumber) {
-        this.idNumber = idNumber;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setRolEmprendedor(String rolEmprendedor) {
-        this.rolEmprendedor = rolEmprendedor;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public void setVinculo(String vinculo) {
-        this.vinculo = vinculo;
-    }
-    // Getters and setters
 }

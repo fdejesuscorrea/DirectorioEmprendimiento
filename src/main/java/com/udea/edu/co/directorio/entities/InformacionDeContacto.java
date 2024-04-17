@@ -7,7 +7,7 @@ public class InformacionDeContacto {
 
     private String email;
 
-    private String mobile;
+    private String telefono;
 
     private String twitter;
 
@@ -17,5 +17,5 @@ public class InformacionDeContacto {
 
     private String linkedin;
 
-    private String webpage;
+    private String paginaweb;
 }

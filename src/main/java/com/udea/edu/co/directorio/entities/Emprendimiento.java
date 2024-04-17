@@ -5,6 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,25 +22,28 @@ public class Emprendimiento {
 
     private String nombre;
 
-    private String email;
-
     private String resumen;
 
+    private boolean formalizada;
 
-    private Boolean ifFormalized;
+    private String nombreLogo;
 
+    private String descripcion;
 
+    @ManyToMany
+    private List<Sector> sectores = new ArrayList<>();
 
-    private String whatsapp;
+    @ManyToMany
+    private List<Servicio> servicios = new ArrayList<>();
 
-    private String webpage;
+    @ManyToMany
+    private List<Emprendedor> fundadores = new ArrayList<>();
 
-    private String logoName;
+    @Embedded
+    private InformacionDeContacto informacionDeContacto;
 
+    @ManyToOne
+    private EtapaMaduracion etapa;
 
-    private String superTipo;
-
-    @Column(name="estado_emprendimiento")
-    private String estadoEmprendimiento;
-    // Getters and setters
+    private LocalDateTime fechaRegistro;
 }
