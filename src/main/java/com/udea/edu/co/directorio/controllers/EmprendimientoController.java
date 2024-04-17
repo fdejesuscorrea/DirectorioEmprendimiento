@@ -29,7 +29,9 @@ public class EmprendimientoController {
     @GetMapping()
     public ResponseEntity<List<Emprendimiento>> getAllEmprendimientos() throws Exception {
         List<Emprendimiento> emprendimientos = emprendimientoService.getAllEmprendimientos();
+        System.out.println("Se hizo");
         return new ResponseEntity<>(emprendimientos, HttpStatus.OK);
+
     }
 
     @GetMapping("/{id}")
