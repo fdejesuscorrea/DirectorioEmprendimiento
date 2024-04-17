@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -16,7 +19,9 @@ public class Emprendedor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
+    private String email;
+
+    @ManyToOne
     private TipoDocumento tipoDocumento;
 
     private Long numeroDocumento;
@@ -27,21 +32,24 @@ public class Emprendedor {
 
     private Long telefono;
 
-    @OneToMany
+    @ManyToOne
     private Vinculo vinculo;
 
-    @OneToMany
+    @ManyToOne
     private  Programa programa;
 
-    @OneToMany
+    @ManyToOne
     private Dependencia dependencia;
 
-    @OneToMany
+    @ManyToOne
     private Estado estado;
 
-    @OneToMany
+    @ManyToOne
     private Genero genero;
 
     private String linkedin;
+
+    @ManyToMany
+    private List<Emprendimiento> emprendimiento = new ArrayList<>();
 
 }

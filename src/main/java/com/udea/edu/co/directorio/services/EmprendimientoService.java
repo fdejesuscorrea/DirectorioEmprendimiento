@@ -1,36 +1,25 @@
 package com.udea.edu.co.directorio.services;
 
-
 import com.udea.edu.co.directorio.entities.Emprendimiento;
-import com.udea.edu.co.directorio.repositories.EmprendimientoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.udea.edu.co.directorio.request.CreateEmprendimientoRequest;
 
 import java.util.List;
 
-@Service
-public class EmprendimientoService {
+public interface EmprendimientoService {
 
-    private final EmprendimientoRepository emprendimientoRepository;
+    public Emprendimiento createEmeprendimiento(CreateEmprendimientoRequest req);
 
-    @Autowired
-    public EmprendimientoService(EmprendimientoRepository emprendimientoRepository) {
-        this.emprendimientoRepository = emprendimientoRepository;
-    }
+    public Emprendimiento updateEmprendimiento(Long emprendimientoId, CreateEmprendimientoRequest updatedEmprendimientoRequest) throws Exception;
 
-    public List<Emprendimiento> findAllEmprendimientos() {
-        return emprendimientoRepository.findAll();
-    }
+    public void deleteEmprendimiento(Long emprendimientoId) throws Exception;
 
-    public Emprendimiento saveEmprendimiento(Emprendimiento emprendimiento) {
-        return emprendimientoRepository.save(emprendimiento);
-    }
+    public List<Emprendimiento> getAllEmprendimientos();
 
-    public Emprendimiento findEmprendimientoById(int id) {
-        return emprendimientoRepository.findById(id).orElse(null);
-    }
+    public List<Emprendimiento> searchEmprendimiento(String keyword);
 
-    public void deleteEmprendimiento(int id) {
-        emprendimientoRepository.deleteById(id);
-    }
+    public Emprendimiento  findEmprendimientoById(Long emprendimientoId) throws Exception;
+
+    public Emprendimiento getEmprendimientoByEmprendedor(Long emprendedorId) throws Exception;
+
+    public Emprendimiento updateEmprendimientoFormalizacion(Long id)throws Exception;
 }

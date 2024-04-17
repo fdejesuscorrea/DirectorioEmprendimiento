@@ -1,13 +1,12 @@
 package com.udea.edu.co.directorio.repositories;
 
 import com.udea.edu.co.directorio.entities.Emprendedor;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import com.udea.edu.co.directorio.entities.TipoDocumento;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface EmprendedorRepository extends JpaRepository<Emprendedor, Long> {
 
-@Repository
-public interface EmprendedorRepository extends CrudRepository<Emprendedor, Integer> {
-    List<Emprendedor> findAll();
+    public Emprendedor findByEmail(String email);
 
+    public Emprendedor findByTipoDocumentoAndNumeroDocumento(TipoDocumento tipoDocumento, long numeroDcoumento);
 }
