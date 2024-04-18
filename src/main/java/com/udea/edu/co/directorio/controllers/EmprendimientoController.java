@@ -1,8 +1,10 @@
 package com.udea.edu.co.directorio.controllers;
 
 import com.udea.edu.co.directorio.entities.Emprendimiento;
+import com.udea.edu.co.directorio.entities.Usuario;
 import com.udea.edu.co.directorio.repositories.EmprendimientoRepository;
 import com.udea.edu.co.directorio.services.EmprendimientoService;
+import com.udea.edu.co.directorio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,26 +20,33 @@ public class EmprendimientoController {
     @Autowired
     private EmprendimientoService emprendimientoService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("/search")
     public  ResponseEntity<List<Emprendimiento>> searchEmprendimiento(
+            @RequestHeader("Authorization") String jwt,
             @RequestParam String keyword
     )throws Exception{
+        Usuario usuario = usuarioService.findUsuarioByJwtToken(jwt);
         List<Emprendimiento> emprendimientos = emprendimientoService.searchEmprendimiento(keyword);
         return new ResponseEntity<>(emprendimientos, HttpStatus.OK);
     }
 
     @GetMapping()
-    public ResponseEntity<List<Emprendimiento>> getAllEmprendimientos() throws Exception {
+    public ResponseEntity<List<Emprendimiento>> getAllEmprendimientos(@RequestHeader("Authorization") String jwt) throws Exception {
+        Usuario usuario = usuarioService.findUsuarioByJwtToken(jwt);
         List<Emprendimiento> emprendimientos = emprendimientoService.getAllEmprendimientos();
-        System.out.println("Se hizo");
         return new ResponseEntity<>(emprendimientos, HttpStatus.OK);
 
     }
 
     @GetMapping("/{id}")
     public  ResponseEntity<Emprendimiento> findEmprendimientoById(
+            @RequestHeader("Authorization") String jwt,
             @PathVariable Long id
     )throws Exception{
+        Usuario usuario = usuarioService.findUsuarioByJwtToken(jwt);
         Emprendimiento emprendimiento = emprendimientoService.findEmprendimientoById(id);
         return new ResponseEntity<>(emprendimiento, HttpStatus.OK);
     }

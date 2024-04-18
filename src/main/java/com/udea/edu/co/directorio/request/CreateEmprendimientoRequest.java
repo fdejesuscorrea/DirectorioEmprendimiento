@@ -19,6 +19,6 @@ public class CreateEmprendimientoRequest {
     private List<Servicio> servicios;
     private List<Emprendedor> fundadores;
     private InformacionDeContacto informacionDeContacto;
-    private EtapaMaduracion etapa;
+    private String etapa;
 
 }

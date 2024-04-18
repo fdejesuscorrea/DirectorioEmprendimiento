@@ -42,8 +42,7 @@ public class Emprendimiento {
     @Embedded
     private InformacionDeContacto informacionDeContacto;
 
-    @ManyToOne
-    private EtapaMaduracion etapa;
+    private String etapa;
 
     private LocalDateTime fechaRegistro;
 }
