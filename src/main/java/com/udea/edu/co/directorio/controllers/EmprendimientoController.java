@@ -34,8 +34,7 @@ public class EmprendimientoController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Emprendimiento>> getAllEmprendimientos(@RequestHeader("Authorization") String jwt) throws Exception {
-        Usuario usuario = usuarioService.findUsuarioByJwtToken(jwt);
+    public ResponseEntity<List<Emprendimiento>> getAllEmprendimientos() throws Exception {
         List<Emprendimiento> emprendimientos = emprendimientoService.getAllEmprendimientos();
         return new ResponseEntity<>(emprendimientos, HttpStatus.OK);
 
@@ -43,10 +42,8 @@ public class EmprendimientoController {
 
     @GetMapping("/{id}")
     public  ResponseEntity<Emprendimiento> findEmprendimientoById(
-            @RequestHeader("Authorization") String jwt,
             @PathVariable Long id
     )throws Exception{
-        Usuario usuario = usuarioService.findUsuarioByJwtToken(jwt);
         Emprendimiento emprendimiento = emprendimientoService.findEmprendimientoById(id);
         return new ResponseEntity<>(emprendimiento, HttpStatus.OK);
     }
