@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -22,11 +24,15 @@ public class AppConfig {
         http.sessionManagement(managment -> managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 //Configura la autorizacion para las peticiones HTTP
                 .authorizeHttpRequests(Authorize -> Authorize
+                        //Las solicitudes que coincidan  con el patron /api/admin/** debe tener uno de los roles especificados
+                        //.requestMatchers("/api/admin/**").authenticated()
+                        //Se especifica que las solicitudes que coincidan con el patron /api/** deben estar autenticadas para ser autorizadas
+                        //.requestMatchers("/api/**").authenticated()
                         //Cualquier otra solicitud que no coincida con los patrones anteriores puede ser accedida sin necesidad de autenticacion o roles especificos
                         .anyRequest().permitAll()
                 )
                 /*Agega un filtro persolizado JwtTokenValidator antes del filtro BasicAuthenticationFilter*/
-                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
+                 .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 /*Deshabilita la proteccion CSRF*/
                 .csrf(csrf->csrf.disable())
                 /*Configura la politica de cors usando un metodo corsConfigurationSoirce personalizado*/
@@ -44,7 +50,7 @@ public class AppConfig {
                CorsConfiguration cfg = new CorsConfiguration();
                //Se establece las solicitudes CORS permitidas desde el origen http://localhost:3000/
                cfg.setAllowedOrigins(Arrays.asList(
-                       "http://localhost:3000/"
+                       "http://localhost:3000"
                ));
                //Se establece metodos HTTP permitidos, en este caso cualquier metodo
                cfg.setAllowedMethods(Collections.singletonList("*"));
@@ -63,5 +69,10 @@ public class AppConfig {
                return cfg;
            }
        };
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
