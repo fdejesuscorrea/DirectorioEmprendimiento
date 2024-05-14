@@ -52,6 +52,7 @@ public class AppConfig {
                cfg.setAllowedOrigins(Arrays.asList(
                        "http://localhost:3000"
                ));
+               //Para pruebas
                //Se establece metodos HTTP permitidos, en este caso cualquier metodo
                cfg.setAllowedMethods(Collections.singletonList("*"));
                //Se establecen credenciales de solicitudes CORS, en este caso se permite que el navegador
