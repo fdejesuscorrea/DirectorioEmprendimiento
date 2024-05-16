@@ -25,7 +25,7 @@ public class AppConfig {
                 //Configura la autorizacion para las peticiones HTTP
                 .authorizeHttpRequests(Authorize -> Authorize
                         //Las solicitudes que coincidan  con el patron /api/admin/** debe tener uno de los roles especificados
-                        //.requestMatchers("/api/admin/**").authenticated()
+                        .requestMatchers("/api/admin/**").authenticated()
                         //Se especifica que las solicitudes que coincidan con el patron /api/** deben estar autenticadas para ser autorizadas
                         //.requestMatchers("/api/**").authenticated()
                         //Cualquier otra solicitud que no coincida con los patrones anteriores puede ser accedida sin necesidad de autenticacion o roles especificos

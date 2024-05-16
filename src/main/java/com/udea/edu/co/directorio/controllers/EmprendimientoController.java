@@ -3,6 +3,7 @@ package com.udea.edu.co.directorio.controllers;
 import com.udea.edu.co.directorio.entities.Emprendimiento;
 import com.udea.edu.co.directorio.entities.Usuario;
 import com.udea.edu.co.directorio.repositories.EmprendimientoRepository;
+import com.udea.edu.co.directorio.request.CreateEmprendimientoRequest;
 import com.udea.edu.co.directorio.services.EmprendimientoService;
 import com.udea.edu.co.directorio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ public class EmprendimientoController {
 
     @Autowired
     private UsuarioService usuarioService;
-
     @GetMapping("/search")
     public  ResponseEntity<List<Emprendimiento>> searchEmprendimiento(
             @RequestHeader("Authorization") String jwt,
@@ -37,9 +37,7 @@ public class EmprendimientoController {
     public ResponseEntity<List<Emprendimiento>> getAllEmprendimientos() throws Exception {
         List<Emprendimiento> emprendimientos = emprendimientoService.getAllEmprendimientos();
         return new ResponseEntity<>(emprendimientos, HttpStatus.OK);
-
     }
-
     @GetMapping("/{id}")
     public  ResponseEntity<Emprendimiento> findEmprendimientoById(
             @PathVariable Long id

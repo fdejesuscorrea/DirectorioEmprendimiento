@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 public class CreateEmprendimientoRequest {
 
-    private Long id;
     private String nombre;
     private String resumen;
     private boolean formalizada;
